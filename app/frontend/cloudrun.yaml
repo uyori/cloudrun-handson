@@ -3,8 +3,8 @@ kind: Service
 metadata:
   name: cnsrun-frontend
   annotations:
-    run.googleapis.com/ingress: all
-#    run.googleapis.com/ingress: internal-and-cloud-load-balancing
+    run.googleapis.com/ingress: internal-and-cloud-load-balancing
+#    run.googleapis.com/ingress: all
 #    run.googleapis.com/binary-authorization: default
 spec:
   template:
@@ -12,28 +12,28 @@ spec:
       annotations:
         autoscaling.knative.dev/maxScale: '2'
         run.googleapis.com/execution-environment: gen2
-#         TODO: change for your own vpc name
-#        run.googleapis.com/network-interfaces: '[{"network":"cnsrun-app", "subnetwork":"cnsrun-cloud-run-book-427111"}]'
-#        run.googleapis.com/vpc-access-egress: all-traffic
+    #         TODO: change for your own vpc name
+    #        run.googleapis.com/network-interfaces: '[{"network":"cnsrun-app", "subnetwork":"cnsrun-the-cloud-run-425107"}]'
+    #        run.googleapis.com/vpc-access-egress: all-traffic
     spec:
       containerConcurrency: 10
       timeoutSeconds: 300
-      serviceAccountName: cnsrun-app-frontend@cloud-run-book-427111.iam.gserviceaccount.com
+      serviceAccountName: cnsrun-app-frontend@the-cloud-run-425107.iam.gserviceaccount.com
       containers:
-      - image: frontend
-        env:
-          - name: BACKEND_FQDN
-            value: "https://cnsrun-backend-noejq743xa-an.a.run.app" # FIXME: Change BACKEND_FQDN value after backend resources is created
-        ports:
-        - name: http1
-          containerPort: 8080
-        resources:
-          limits:
-            cpu: 1000m
-            memory: 512Mi
-        startupProbe:
-          timeoutSeconds: 240
-          periodSeconds: 240
-          failureThreshold: 1
-          tcpSocket:
-            port: 8080
+        - image: frontend
+          env:
+            - name: BACKEND_FQDN
+              value: 'https://cnsrun-backend-noejq743xa-an.a.run.app' # FIXME: Change BACKEND_FQDN value after backend resources is created
+          ports:
+            - name: http1
+              containerPort: 8080
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+          startupProbe:
+            timeoutSeconds: 240
+            periodSeconds: 240
+            failureThreshold: 1
+            tcpSocket:
+              port: 8080
