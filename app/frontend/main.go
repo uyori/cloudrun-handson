@@ -19,7 +19,7 @@ type Response struct {
 
 func main() {
 	http.HandleFunc("/frontend", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Cloud build v1!\n")
+		fmt.Fprintf(w, "FIX Cloud build v1!\n")
 	})
 
 	http.HandleFunc("/random", func(w http.ResponseWriter, r *http.Request) {
