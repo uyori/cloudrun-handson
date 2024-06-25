@@ -17,7 +17,7 @@ spec:
     spec:
       containerConcurrency: 10
       timeoutSeconds: 300
-      serviceAccountName: cnsrun-app-frontend@the-cloud-run-425107.iam.gserviceaccount.com
+      serviceAccountName: cnsrun-app-frontend@cloud-run-book-427111.iam.gserviceaccount.com
       containers:
         - image: frontend
           env:
